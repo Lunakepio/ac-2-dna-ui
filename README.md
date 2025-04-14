@@ -1,4 +1,7 @@
 # 🧬 Assassin's Creed 2 DNA Menu (Instanced Shader Render)
+## 📸 Screenshots
+
+![Screenshot of DNA Menu](./public/read-me-hero.png)
 
 This project is a real-time 3D recreation of the **classic Assassin's Creed II DNA menu**, powered by **Three.js**, **React Three Fiber (r3f)**, and **@three.ez/instanced-mesh**.  
 It uses a **shader-based instanced mesh renderer** to deliver high-performance visuals with efficient GPU-driven rendering.
