@@ -1,12 +1,67 @@
-# React + Vite
+# 🧬 Assassin's Creed 2 DNA Menu (Instanced Shader Render)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a real-time 3D recreation of the **classic Assassin's Creed II DNA menu**, powered by **Three.js**, **React Three Fiber (r3f)**, and **@three.ez/instanced-mesh**.  
+It uses a **shader-based instanced mesh renderer** to deliver high-performance visuals with efficient GPU-driven rendering.
 
-Currently, two official plugins are available:
+Navigate through sequences and cells just like Desmond did — in your browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Demo
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> [Try it here](https://ac-2-dna-ui.vercel.app/)
+
+---
+
+## 🧰 Tech Stack
+
+- [three.js](https://threejs.org/)
+- [@react-three/fiber (r3f)](https://github.com/pmndrs/react-three-fiber)
+- [@three.ez/instanced-mesh](https://www.npmjs.com/package/@three.ez/instanced-mesh)
+- GLSL Shader Materials
+
+---
+
+## 🎮 Controls
+
+| Key        | Action                          |
+|------------|----------------------------------|
+| `← / A`     | Navigate Left (Sequence/Cell)   |
+| `→ / D`     | Navigate Right (Sequence/Cell)  |
+| `Enter`    | Select Sequence / Enter Cell View |
+| `Escape`    | Unselect Sequence / Unselect Cell View |
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/ac2-dna-menu-clone.git
+cd ac2-dna-menu-clone
+
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install || bun install
+```
+
+### 3. Run the Project
+
+```bash
+npm run dev || bun run dev
+```
+
+## ✨ Features
+- Fully GPU-accelerated with InstancedMesh2
+
+- Custom shaders replicating the glowing DNA strands
+
+- Keyboard-based navigation
+
+- Modular, component-driven architecture
+
+- Accurate layout inspired by Assassin’s Creed II’s iconic UI
