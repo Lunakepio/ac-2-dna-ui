@@ -16,10 +16,12 @@ void main() {
     if (tex.r < 0.1 && tex.g < 0.1 && tex.b < 0.1) {
         discard;
     }
-    vec3 color = shouldBeRed == 1.0 ? redColor : baseColor;
-    vec3 borderColor = shouldBeRed == 1.0 ? vec3(0.8, 0.0, 0.0) : vec3(1.);
 
-    vec3 targetGreen = vec3(0.0, 1.0, 0.0);
+    vec3 redBorder = vec3(0.8, 0.0, 0.0);
+    vec3 color = mix(baseColor, redColor, shouldBeRed);
+    vec3 borderColor = mix(vec3(1.0), redBorder, shouldBeRed);
+
+    vec3 targetGreen = vec3(0.0, 1.0, 0.0); // using the green channel to render the border
     float greenThreshold = 0.6;
     if (colorDistance(tex.rgb, targetGreen) < greenThreshold) {
         gl_FragColor = vec4(borderColor, .8);

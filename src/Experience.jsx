@@ -1,21 +1,13 @@
-import { useFrame, useThree, useLoader } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { useDNAStore } from './store/store';
 import { useEffect } from 'react';
-import { MathUtils, TextureLoader } from 'three';
+import { MathUtils } from 'three';
 import { useRef } from 'react';
 import { data } from './data';
 import Shape from './shapes/Shape';
 
-
 export const Experience = () => {
-  const texture = useLoader(TextureLoader, "/white.png");
   const length = data.length;
-  const shapeArray = Array.from({ length }, (_, index) => ({
-    position: [0, data[length - index - 1].y * 3, index * 0.4 - ((length / 2) * 0.3)],
-    delay: index * 0.05,
-    scale: 1 + Math.abs(Math.sin(index / length)),
-    index,
-  }));
 
   const { hoveredSequence, selectedSequence, selectedIndex, setHoveredSequence, setSelectedSequence, setSelectedIndex } = useDNAStore();
 
@@ -85,9 +77,6 @@ export const Experience = () => {
     <>
       <group ref={groupRef}>
         <Shape/>
-        {/* {shapeArray.map((shape, index) => (
-          <Shape key={index} {...shape} />
-        ))} */}
       </group>
     </>
   );

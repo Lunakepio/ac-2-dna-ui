@@ -3,7 +3,6 @@ import { InstancedMesh2 } from "@three.ez/instanced-mesh";
 import { useMemo, useRef, useEffect } from "react";
 import { useDNAStore } from "../store/store";
 import {
-  NearestFilter,
   Color,
   ShaderMaterial,
   TextureLoader,
@@ -36,7 +35,6 @@ export const Shape = () => {
   texture.magFilter = LinearFilter;
 texture.minFilter = LinearFilter;
 texture.generateMipmaps = false;
-// texture.needsUpdate = true;
 
   const geometry = useMemo(() => new PlaneGeometry(1, 1, 1, 1), []);
 
@@ -67,19 +65,16 @@ texture.generateMipmaps = false;
 
   const getFactor = (index) => index / data.length;
 
-  const redColor = new Color(0x700b03);
-
   useEffect(() => {
     if (ref.current) {
-      // ref.current.computeBVH();
       ref.current.initUniformsPerInstance({ fragment: { baseColor: "vec3", shouldBeRed: "float" } });
     }
   }, []);
 
   const sequenceSize = 9;
-const spacing = 0.7;
+const spacing = 0.8;
   
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (!ref.current) return;
     const { hoveredSequence, selectedSequence, selectedIndex } = useDNAStore.getState();
 
@@ -92,13 +87,14 @@ const spacing = 0.7;
         );
         obj.baseZ = obj.position.z;
         obj.baseY = obj.position.y;
-        obj.targetY = obj.position.y + 1;
+        obj.targetY = obj.position.y + 1.5;
         obj.rotateY(-1);
-        obj.rotateZ(-0.05 * index);
+        obj.rotateZ(-0.12 * index);
         obj.sequence = Math.floor(index / sequenceSize) + 1;
         obj.indexInSequence = index % sequenceSize;
         const scale = 4 + Math.abs(Math.sin(index / data.length));
-        obj.scale.set(scale, scale, scale);
+        obj.scaleTarget = scale;
+        obj.scale.set(0, 0, 0);
         obj.scaleTarget = (scale, scale, scale);
         const color = new Color(
           rgbToHex(...interpolateColor(startColor, endColor, getFactor(index)))
@@ -106,15 +102,20 @@ const spacing = 0.7;
 
 
         obj.setUniform('baseColor', color)
-        obj.setUniform('shouldBeRed', 0.0)
+        obj.setUniform('shouldBeRed', 0.0);
+        obj.shouldBeRed = 0.0;
 
       });
     }
+
+    const transformSpeed = 4;
     ref.current.updateInstances((obj) => {
       obj.rotateZ(-0.001);
       
-      const shouldBeRed = obj.sequence === hoveredSequence;
-      obj.setUniform('shouldBeRed', Number(shouldBeRed));
+      const current = obj.shouldBeRed;
+      const target = obj.sequence === hoveredSequence ? 1. : 0.;
+      obj.shouldBeRed = lerp(current, target, 12 * delta)
+      obj.setUniform('shouldBeRed', obj.shouldBeRed);
     
       let targetZ = obj.baseZ;
       let targetY = selectedIndex === obj.indexInSequence && obj.sequence === selectedSequence ? obj.targetY : obj.baseY;
@@ -125,10 +126,15 @@ const spacing = 0.7;
         targetZ = obj.baseZ + sequenceSize * spacing;
       }
     
-      console.log(targetY)
   
-      obj.position.z = lerp(obj.position.z, targetZ, 0.1);
-      obj.position.y = lerp(obj.position.y, targetY, 0.1);
+      obj.position.z = lerp(obj.position.z, targetZ, transformSpeed * delta);
+      obj.position.y = lerp(obj.position.y, targetY, transformSpeed * delta);
+
+      if(obj.scale.x < obj.scaleTarget){
+        obj.scale.x = lerp(obj.scale.x, obj.scaleTarget, (transformSpeed / 2) * delta);
+        obj.scale.y = lerp(obj.scale.y, obj.scaleTarget, (transformSpeed / 2) * delta);
+        obj.scale.z = lerp(obj.scale.z, obj.scaleTarget, (transformSpeed / 2) * delta);
+      }
     
     });
   });

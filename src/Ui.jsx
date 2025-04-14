@@ -9,6 +9,7 @@ export const Ui = () => {
   const memoryRef = useRef(null);
   const spanRef = useRef(null);
   const titleRef = useRef(null);
+  const microPlaneRef = useRef(null);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -43,6 +44,7 @@ export const Ui = () => {
     if (spanRef.current) {
       spanRef.current.innerHTML = hoveredSequence;
     }
+
   }, [hoveredSequence, selectedIndex]);
 
   useGSAP(() => {
@@ -63,6 +65,23 @@ export const Ui = () => {
     }
   }, [selectedSequence]);
 
+  useGSAP(() => {
+    if (microPlaneRef.current) {
+      gsap.to(microPlaneRef.current, {
+        duration: 0.1,
+        scale: 1,
+        opacity: 0,
+        ease: "power2.inOut",
+        onComplete: () => {
+          gsap.set(microPlaneRef.current,{
+            scale: 0,
+            opacity: 1,
+          })
+        }
+      });
+    }
+  }, [hoveredSequence, selectedSequence, selectedIndex]);
+
   return (
     <div className="ui-container">
       <div className="titles">
@@ -75,7 +94,8 @@ export const Ui = () => {
       <div className="bottom">
         <div className="red">
           <div className="plane">
-            <div className="micro-plane"></div>
+            <div className="micro-plane" ref={microPlaneRef}>
+            </div>
           </div>
         </div>
         <div className="memory" ref={memoryRef}>

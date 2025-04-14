@@ -82,6 +82,17 @@
                 height: 30px;
                 background: rgb(255,255,255);
                 rotate: 45deg;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                .micro-plane{
+
+                    width:30px;
+                    height: 30px;
+                    background: rgb(0,0,0);
+                    scale: 0;
+                    opacity: 1;
+                }
             }
         }
         .memory{
