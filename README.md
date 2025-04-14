@@ -13,6 +13,7 @@ Navigate through sequences and cells just like Desmond did — in your browser.
 ## 🚀 Demo
 
 > [Try it here](https://ac-2-dna-ui.vercel.app/)
+> [also available here](https://stackblitz.com/~/github.com/Lunakepio/ac-2-dna-ui)
 
 ---
 
