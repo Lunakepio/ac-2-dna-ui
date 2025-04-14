@@ -1,0 +1,114 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Aaux Next';
+  font-weight: 300;
+}
+
+.canvas-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  canvas{
+      z-index: 2;
+  }
+}
+
+.ui-container{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    .titles{
+        align-self: flex-start;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .title{
+        align-self: flex-start;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 42px;
+        height: 42px;
+        position: relative;
+        margin-left: 150px;
+        .span{
+            margin-left: 12px;
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 42px;
+            background: #1E1E1EEE;
+            z-index: -1;
+            margin-top:-4px;
+            
+        }
+    }
+    .title-2{
+        margin-left:0px;
+        padding-left:12px;
+    }
+    .bottom{
+        display:flex;
+        justify-content: center;
+        align-self: flex-start;
+        gap: 4px;
+        .red{
+            width:250px;
+            height: 60px;
+            background: rgb(142,0,0);
+            background: linear-gradient(180deg, rgba(142,0,0,1) 0%, rgba(168,3,3,1) 100%);
+            display:flex;
+            align-items:center;
+            justify-content: flex-end;
+            padding-right: 20px;
+            .plane{
+                width: 30px;
+                height: 30px;
+                background: rgb(255,255,255);
+                rotate: 45deg;
+            }
+        }
+        .memory{
+            margin-top:2px;
+            position: relative;
+            font-size: 24px;
+            opacity: 0;
+            &::before{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height:24px;
+                background: #1E1E1EAA;
+                z-index: -1;
+                margin-top:-2px;
+            }
+        }
+    }
+}
+
+@keyframes appear{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
