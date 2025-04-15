@@ -28,7 +28,7 @@ const rgbToHex = (r, g, b) => {
     .toUpperCase()}`;
 };
 
-export const Shape = () => {
+export const Shapes = () => {
   const ref = useRef();
 
   const texture = useLoader(TextureLoader, "./texture.png");
@@ -53,7 +53,6 @@ texture.generateMipmaps = false;
         transparent: true,
         depthWrite: false,
         defines: {
-          USE_INSTANCING: true,
           USE_INSTANCING_INDIRECT: true,
         },
       }),
@@ -147,4 +146,4 @@ const spacing = 0.8;
   );
 };
 
-export default memo(Shape);
+export default memo(Shapes);

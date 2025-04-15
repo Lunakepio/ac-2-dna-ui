@@ -1,4 +1,4 @@
-#ifdef USE_INSTANCING
+#ifdef USE_INSTANCING_INDIRECT
   #include <instanced_pars_vertex>
 #endif
 
@@ -9,7 +9,7 @@ void main() {
   vPosition = position;
   vUv = uv;
   
-  #ifdef USE_INSTANCING
+  #ifdef USE_INSTANCING_INDIRECT
     #include <instanced_vertex>
   #endif
 

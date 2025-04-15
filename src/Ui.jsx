@@ -102,6 +102,10 @@ export const Ui = () => {
           MEMORY {selectedIndex}
         </div>
       </div>
+      <div className="inputs">
+        <div className="flex center left"><img className="bigger" src="./inputs/arrows.svg" alt="arrows" /><p><span>NAVIGATE LEFT/RIGHT</span></p></div>
+        <div className="flex center right"><p><img src="./inputs/enter.svg" alt="enter" /> <p><span>SELECT</span></p></p> <p><img src="./inputs/escape.svg" alt="escape" /> <p><span>RETURN</span></p></p></div>
+      </div>
     </div>
   );
 };

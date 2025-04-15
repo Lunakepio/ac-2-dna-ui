@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { MathUtils } from 'three';
 import { useRef } from 'react';
 import { data } from './data';
-import Shape from './shapes/Shape';
+import Shapes from './shapes/Shapes';
 
 export const Experience = () => {
   const length = data.length;
@@ -76,7 +76,7 @@ export const Experience = () => {
   return (
     <>
       <group ref={groupRef}>
-        <Shape/>
+        <Shapes/>
       </group>
     </>
   );
